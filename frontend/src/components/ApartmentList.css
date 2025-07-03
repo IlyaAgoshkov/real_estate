@@ -1,0 +1,663 @@
+body {
+    background: rgb(255, 255, 255);
+}
+
+.apartment-list {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.app-header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.apartments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.apartment-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    min-height: 100px;
+    max-height: 420px;
+}
+
+
+.apartment-card:hover {
+    transform: translateY(-5px);
+}
+
+.apartment-image-container {
+    width: 100%;
+    height: 400px;
+    background: #f5f5f5;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    object-position: bottom;
+}
+
+
+.apartment-image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+}
+
+
+.no-image {
+    width: 100%;    
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.apartment-info {
+    padding: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+}
+
+.apartment-complex {
+    color: #3b51c6;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+
+.apartment-title-block {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.apartment-title {
+    font-weight: bold;
+}
+
+.apartment-area {
+    font-weight: normal;
+    color: #222;
+}
+
+.apartment-meta {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 0.7rem;
+}
+
+.apartment-divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 0.7rem 0 0.7rem 0;
+}
+
+.apartment-card .apartment-price-block {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ff0000;
+    margin-bottom: 0.2rem;
+}
+
+.apartment-card .apartment-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4361ee;
+    margin-bottom: 0.5rem;
+}
+
+.apartment-card .apartment-price-per-m2 {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.apartment-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.detail-label {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.detail-value {
+    font-size: 1rem;
+    color: #333;
+}
+
+.address {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    font-size: 1.2rem;
+    color: #dc3545;
+}
+
+@media (max-width: 768px) {
+    .apartment-list {
+        padding: 0.8rem;
+    }
+
+    .app-header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .apartments-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .apartment-image-container {
+        height: 220px;
+    }
+
+    .apartment-card {
+        min-height: 340px;
+        border-radius: 12px;
+    }
+
+    .apartment-info {
+        padding: 0.8rem;
+    }
+
+    .apartment-complex {
+        font-size: 0.9rem;
+    }
+
+    .apartment-title-block {
+        font-size: 1rem;
+    }
+
+    .apartment-meta {
+        font-size: 0.9rem;
+    }
+
+    .apartment-card .apartment-price {
+        font-size: 1.2rem;
+    }
+
+    .mui-filters {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    .mui-filters-row {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .mui-filter-col {
+        width: 100%;
+    }
+
+    .mui-filter-label {
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .mui-slider-values {
+        font-size: 0.9rem;
+    }
+
+    .mui-filter-actions {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 0.8rem;
+    }
+
+    .mui-filter-actions button {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 0.95rem;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.3rem;
+        margin-top: 1.5rem;
+    }
+
+    .pagination-btn {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.9rem;
+        min-width: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .apartment-list {
+        padding: 0.6rem;
+    }
+
+    .app-header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .apartment-image-container {
+        height: 180px;
+    }
+
+    .apartment-card {
+        min-height: 300px;
+    }
+
+    .apartment-info {
+        padding: 0.7rem;
+    }
+
+    .apartment-complex {
+        font-size: 0.85rem;
+    }
+
+    .apartment-title-block {
+        font-size: 0.95rem;
+    }
+
+    .apartment-meta {
+        font-size: 0.85rem;
+    }
+
+    .apartment-card .apartment-price {
+        font-size: 1.1rem;
+    }
+
+    .mui-filters {
+        padding: 0.8rem;
+    }
+
+    .mui-filter-label {
+        font-size: 0.85rem;
+    }
+
+    .mui-slider-values {
+        font-size: 0.85rem;
+    }
+
+    .mui-filter-actions button {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .pagination-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.85rem;
+        min-width: 28px;
+    }
+}
+
+.filters {
+    background: rgb(0, 0, 0);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: #3b51c6;
+}
+
+.filter-group input[type="number"] {
+    width: 100%;
+}
+
+.filter-group select {
+    width: 100%;
+    background-color: white;
+}
+
+.mui-filters {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 16px;
+    padding: 2rem 2rem 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    background: #fff;
+}
+.mui-filters-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+.mui-filter-col {
+    flex: 1 1 220px;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+.mui-filter-label {
+    font-size: 0.95rem;
+    color: #000000;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+.mui-slider-values {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    color: #222;
+    margin-top: 0.2rem;
+    font-variant-numeric: tabular-nums;
+}
+.MuiButtonGroup-root .MuiButton-root {
+    border-radius: 50% !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    font-weight: 500;
+    font-size: 1.1rem;
+    background: #fff;
+    transition: background 0.2s, color 0.2s;
+}
+.MuiButtonGroup-root .MuiButton-root.Mui-selected,
+.MuiButtonGroup-root .MuiButton-root.MuiButton-contained {
+    background: #ff5a1f !important;
+    color: #fff !important;
+    border: none;
+}
+.MuiButtonGroup-root .MuiButton-root:hover {
+    background: #ffe3d3 !important;
+    color: #ff5a1f !important;
+}
+.MuiSlider-root {
+    margin-top: 0.7rem;
+    margin-bottom: 0.2rem;
+}
+.MuiSlider-thumb {
+    box-shadow: 0 2px 8px rgba(255,90,31,0.15);
+}
+.MuiSlider-track {
+    background: #ff5a1f;
+}
+.MuiSlider-rail {
+    background: #ff5a1f22;
+}
+@media (max-width: 900px) {
+    .mui-filters-row {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    .mui-filters {
+        padding: 1rem;
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.pagination-btn {
+    padding: 0.4rem 0.9rem;
+    border: 1px solid #4361ee;
+    background: none;
+    color: #4361ee;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+    min-width: 36px;
+}
+
+.pagination-btn.active,
+.pagination-btn:disabled {
+    background: #4361ee;
+    color: #fff;
+    cursor: default;
+    border: 1px solid #4361ee;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+}
+
+.filter-mobile-trigger {
+    display: none;
+    width: 100%;
+    padding: 0.8rem;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.filter-mobile-trigger svg {
+    margin-right: 0.5rem;
+}
+
+.filter-drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.filter-drawer.open {
+    right: 0;
+}
+
+.filter-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.filter-drawer-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.filter-drawer-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.filter-drawer-content {
+    padding-bottom: 2rem;
+}
+
+.filter-drawer-footer {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 1rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 1rem;
+}
+
+.filter-drawer-footer button {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.filter-drawer-footer .reset-btn {
+    background: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.filter-drawer-footer .apply-btn {
+    background: #ff5a1f;
+    color: #fff;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .filter-mobile-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mui-filters {
+        display: none;
+    }
+
+    .filter-drawer .mui-filters {
+        display: block;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .filter-drawer .mui-filters-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .filter-drawer .mui-filter-col {
+        width: 100%;
+    }
+
+    .filter-drawer .mui-filter-label {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .filter-drawer .mui-slider-values {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-drawer {
+        padding: 0.8rem;
+    }
+
+    .filter-drawer-header {
+        margin-bottom: 1rem;
+    }
+
+    .filter-drawer-title {
+        font-size: 1.1rem;
+    }
+
+    .filter-drawer-content {
+        padding-bottom: 1.5rem;
+    }
+
+    .filter-drawer-footer {
+        padding: 0.8rem;
+    }
+
+    .filter-drawer-footer button {
+        padding: 0.7rem;
+        font-size: 0.95rem;
+    }
+} 

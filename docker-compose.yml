@@ -1,0 +1,42 @@
+services:
+  backend:
+    build:
+      context: ./apartments_service
+      dockerfile: ../Dockerfile.backend
+    command: sh -c "python manage.py migrate && python manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./apartments_service/media:/app/media
+    environment:
+      - DJANGO_SETTINGS_MODULE=apartments_service.settings
+      - POSTGRES_DB=realestate
+      - POSTGRES_USER=realuser
+      - POSTGRES_PASSWORD=realpassword
+      - POSTGRES_HOST=db
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: realestate
+      POSTGRES_USER: realuser
+      POSTGRES_PASSWORD: realpassword
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../Dockerfile.frontend
+    stdin_open: true
+    tty: true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data: 
