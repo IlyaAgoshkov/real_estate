@@ -12,6 +12,7 @@ import ProductGallery from './ProductGallery/ProductGallery';
 import { FaFilter } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import './ApartmentList.css';
+import api from '../api';
 
 const ROOM_OPTIONS = [
     { label: '1', value: 1 },
@@ -81,17 +82,16 @@ function ApartmentList() {
             rooms: pending.rooms === '' ? '' : pending.rooms,
             complex_name: pending.complex
         });
-        fetch(`http://192.168.0.13:8000/apartments/api/?${queryParams}`)
-            .then(r => r.json())
-            .then(data => {
-                setPendingCount(data.count || 0);
+        api.get(`/?${queryParams}`)
+            .then(response => {
+                setPendingCount(response.data.count || 0);
                 setCountLoading(false);
             })
             .catch(() => setCountLoading(false));
     }, [pending]);
 
     useEffect(() => {
-            setLoading(true);
+        setLoading(true);
         const queryParams = new URLSearchParams({
             page,
             page_size: pageSize,
@@ -104,11 +104,10 @@ function ApartmentList() {
             rooms: applied.rooms === '' ? '' : applied.rooms,
             complex_name: applied.complex
         });
-        fetch(`http://192.168.0.13:8000/apartments/api/?${queryParams}`)
-            .then(r => r.json())
-            .then(data => {
-                setApartments(data.results);
-                setTotal(data.count);
+        api.get(`/?${queryParams}`)
+            .then(response => {
+                setApartments(response.data.results);
+                setTotal(response.data.count);
                 setLoading(false);
             })
             .catch(e => {
@@ -284,7 +283,7 @@ function ApartmentList() {
                 </div>
             </div>
 
-            {/* Desktop Filters */}
+
             <Box className="mui-filters" sx={{ background: '#fff', borderRadius: 2, p: 3, mb: 4, boxShadow: 1 }}>
                 <div className="mui-filters-row">
                     <div className="mui-filter-col">
@@ -401,7 +400,7 @@ function ApartmentList() {
                             <Link to={`/apartments/${apartment.id}`} key={apartment.id} className="apartment-card">
                                 <div className="apartment-image-container">
                                     {apartment.image ? (
-                                        <img src={apartment.image} alt={apartment.title} className="apartment-image" />
+                                        <img src={apartment.image.startsWith('http') ? apartment.image : `http://192.168.0.44:80${apartment.image}`} alt={apartment.title} className="apartment-image" />
                                     ) : (
                                         <div className="no-image">No image</div>
                                     )}

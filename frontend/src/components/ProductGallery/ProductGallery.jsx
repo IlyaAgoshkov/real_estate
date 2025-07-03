@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './ProductGallery.css';
+import api from '../../api';
 
 function formatNumber(num) {
     return num.toLocaleString('ru-RU');
@@ -14,35 +15,20 @@ const ProductGallery = () => {
 
     useEffect(() => {
         const fetchProfitableApartments = async () => {
-            const token = localStorage.getItem('token');
-
-            if (!token) {
-                setError('Для просмотра популярных предложений необходимо войти.');
-                setLoading(false);
-                return;
-            }
-
             try {
-                const response = await fetch('http://192.168.0.13:8000/apartments/api/profitable_apartments/', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                if (!response.ok) {
-
-                    if (response.status === 401) {
-                        setError('Сессия истекла или пользователь не авторизован. Пожалуйста, войдите снова.');
-                    } else {
-                        setError(`HTTP error! status: ${response.status}`);
-                    }
-                    setLoading(false);
-                    return;
-                }
-                const data = await response.json();
-                setApartments(data);
+                const response = await api.get('/profitable_apartments/');
+                setApartments(response.data);
                 setLoading(false);
             } catch (error) {
-                setError(error.message);
+                if (error.response) {
+                    if (error.response.status === 401) {
+                        setError('Сессия истекла или пользователь не авторизован. Пожалуйста, войдите снова.');
+                    } else {
+                        setError(`HTTP error! status: ${error.response.status}`);
+                    }
+                } else {
+                    setError(error.message);
+                }
                 setLoading(false);
             }
         };
@@ -88,7 +74,7 @@ const ProductGallery = () => {
                     <Link to={`/apartments/${apartment.id}`} key={apartment.id} className="product-card">
                         <div className="product-image">
                             {apartment.image ? (
-                                <img src={`http://192.168.0.13:8000${apartment.image}`} alt={apartment.title} />
+                                <img src={`http://192.168.0.44:80${apartment.image}`} alt={apartment.title} />
                             ) : (
                                 <div className="no-image">No image</div>
                             )}
