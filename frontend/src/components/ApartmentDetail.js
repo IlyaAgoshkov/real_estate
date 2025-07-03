@@ -35,7 +35,7 @@ const ApartmentDetail = () => {
     useEffect(() => {
         const fetchApartmentDetails = async () => {
             try {
-                const response = await fetch(`http://192.168.0.44:80/apartments/${id}/`);
+                const response = await fetch(`http://192.168.0.44:8000/apartments/${id}/`);
                 if (!response.ok) {
                     throw new Error('Apartment not found');
                 }
@@ -48,7 +48,7 @@ const ApartmentDetail = () => {
 
         const fetchForecast = async () => {
             try {
-                const response = await fetch(`http://192.168.0.44:80/apartments/api/forecast/${id}/`);
+                const response = await fetch(`http://192.168.0.44:8000/apartments/api/forecast/${id}/`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch forecast');
                 }
