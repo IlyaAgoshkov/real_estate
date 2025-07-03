@@ -400,7 +400,7 @@ function ApartmentList() {
                             <Link to={`/apartments/${apartment.id}`} key={apartment.id} className="apartment-card">
                                 <div className="apartment-image-container">
                                     {apartment.image ? (
-                                        <img src={apartment.image.startsWith('http') ? apartment.image : `http://192.168.0.44:8000${apartment.image}`} alt={apartment.title} className="apartment-image" />
+                                        <img src={apartment.image.startsWith('http') ? apartment.image : `https://192.168.0.44:8000${apartment.image}`} alt={apartment.title} className="apartment-image" />
                                     ) : (
                                         <div className="no-image">No image</div>
                                     )}
