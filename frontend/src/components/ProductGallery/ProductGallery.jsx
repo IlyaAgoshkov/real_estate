@@ -74,7 +74,7 @@ const ProductGallery = () => {
                     <Link to={`/apartments/${apartment.id}`} key={apartment.id} className="product-card">
                         <div className="product-image">
                             {apartment.image ? (
-                                <img src={`https://192.168.0.44:8000${apartment.image}`} alt={apartment.title} />
+                                <img src={`http://192.168.0.44:8000${apartment.image}`} alt={apartment.title} />
                             ) : (
                                 <div className="no-image">No image</div>
                             )}

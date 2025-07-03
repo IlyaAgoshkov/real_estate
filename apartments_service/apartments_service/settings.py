@@ -169,13 +169,12 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 }
 
-# Разрешить все источники (для теста, потом уберите!)
-CORS_ALLOW_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost',
+    'http://127.0.0.1',
+    'http://192.168.0.13',
+    'http://192.168.0.13:3000',
+    'http://192.168.0.13:81',
+]
 
-# Или разрешить только нужные адреса:
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-#     "http://127.0.0.1:3000",
-#     "http://192.168.1.10:3000",  # IP вашего ПК в сети
-#     "http://ваш_домен"
-# ]
+CORS_ALLOW_ALL_ORIGINS = True 
