@@ -173,8 +173,13 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost',
     'http://127.0.0.1',
     'http://192.168.0.13',
-    'http://192.168.0.13:3000',
-    'http://192.168.0.13:81',
+    'http://192.168.0.44:3000',
+    'http://192.168.0.44:81',
+    'https://192.168.0.13',
+    'https://192.168.0.44:3000',
+    'https://192.168.0.44:81',
+    'http://krasnodar.k-lab.su/',
+    'https://krasnodar.k-lab.su/',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True 
