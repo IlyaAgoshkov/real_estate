@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:81/api/apartments',
+  baseURL: 'https://krasnodar-api.k-lab.su/api/apartments',
   headers: { 'Content-Type': 'application/json' },
 });
 

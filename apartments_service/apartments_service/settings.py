@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*'] 
 
-BASE_URL = 'http://localhost:81'
+BASE_URL = 'https://krasnodar-api.k-lab.su'
 
 # Application definition
 # CELERY_BROKER_URL = 'redis://localhost:6379/0'

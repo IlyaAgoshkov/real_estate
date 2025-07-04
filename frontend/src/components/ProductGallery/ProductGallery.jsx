@@ -84,7 +84,7 @@ const ProductGallery = () => {
                                     src={
                                         apartment.image_url.startsWith('http')
                                             ? apartment.image_url
-                                            : `http://localhost:81${apartment.image_url.startsWith('/') ? apartment.image_url : '/' + apartment.image_url}`
+                                            : `https://krasnodar-api.k-lab.su${apartment.image_url.startsWith('/') ? apartment.image_url : '/' + apartment.image_url}`
                                     }
                                     alt={apartment.title}
                                 />
