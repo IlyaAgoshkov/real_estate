@@ -13,6 +13,7 @@ import {
     Legend
 } from 'chart.js';
 import './ApartmentDetail.css';
+import api from '../api';
 
 ChartJS.register(
     CategoryScale,
@@ -35,32 +36,24 @@ const ApartmentDetail = () => {
     useEffect(() => {
         const fetchApartmentDetails = async () => {
             try {
-                const response = await fetch(`http://192.168.0.44:8000/apartments/${id}/`);
-                if (!response.ok) {
-                    throw new Error('Apartment not found');
-                }
-                const data = await response.json();
-                setApartment(data);
+                const response = await api.get(`/${id}/`);
+                setApartment(response.data);
             } catch (err) {
-                setError(err.message);
+                setError('Apartment not found');
             }
         };
-
+    
         const fetchForecast = async () => {
             try {
-                const response = await fetch(`http://192.168.0.44:8000/apartments/api/forecast/${id}/`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch forecast');
-                }
-                const data = await response.json();
-                setForecast(data);
+                const response = await api.get(`/forecast/${id}/`);
+                setForecast(response.data);
             } catch (err) {
                 console.error('Error fetching forecast:', err);
             } finally {
                 setLoading(false);
             }
         };
-
+    
         fetchApartmentDetails();
         fetchForecast();
     }, [id]);
@@ -118,8 +111,15 @@ const ApartmentDetail = () => {
             </div>
             <div className="apartment-content-horizontal">
                 <div className="apartment-image_detail">
-                    {apartment.image_url ? (
-                        <img src={apartment.image_url} alt={apartment.title} />
+                    {apartment.image ? (
+                        <img
+                            src={
+                                apartment.image.startsWith('http')
+                                    ? apartment.image
+                                    : `http://localhost:81${apartment.image.startsWith('/') ? apartment.image : '/' + apartment.image}`
+                            }
+                            alt={apartment.title}
+                        />
                     ) : (
                         <div className="no-image">No image available</div>
                     )}

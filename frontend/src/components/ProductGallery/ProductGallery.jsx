@@ -17,7 +17,13 @@ const ProductGallery = () => {
         const fetchProfitableApartments = async () => {
             try {
                 const response = await api.get('/profitable_apartments/');
-                setApartments(response.data);
+                const data = Array.isArray(response.data)
+                    ? response.data
+                    : Array.isArray(response.data.results)
+                        ? response.data.results
+                        : [];
+
+                setApartments(data);
                 setLoading(false);
             } catch (error) {
                 if (error.response) {
@@ -61,8 +67,8 @@ const ProductGallery = () => {
     if (error) {
         return <div className="product-gallery">Ошибка: {error}</div>;
     }
-    
-    if (apartments.slice(1).length === 0) {
+
+    if (!Array.isArray(apartments) || apartments.length <= 1) {
         return <div className="product-gallery">Нет популярных предложений.</div>;
     }
 
@@ -74,20 +80,26 @@ const ProductGallery = () => {
                     <Link to={`/apartments/${apartment.id}`} key={apartment.id} className="product-card">
                         <div className="product-image">
                             {apartment.image ? (
-                                <img src={`http://192.168.0.44:8000${apartment.image}`} alt={apartment.title} />
+                                <img
+                                    src={
+                                        apartment.image.startsWith('http')
+                                            ? apartment.image
+                                            : `/media/${apartment.image.replace(/^\/+/, '')}`
+                                    }
+                                    alt={apartment.title}
+                                />
                             ) : (
                                 <div className="no-image">No image</div>
                             )}
                         </div>
                         <div className="product-info">
                             <div className="product-complex">{apartment.complex_name}</div>
-
                             <div className="product-details">
-                                <span className="product-area-rooms">{apartment.area} м² {apartment.rooms} комн.</span>
+                                <span className="product-area-rooms">
+                                    {apartment.area} м² {apartment.rooms} комн.
+                                </span>
                             </div>
-
                             <div className="product-price">{formatNumber(apartment.price)} ₽</div>
-
                             <div className="product-address">{apartment.address}</div>
 
                             {apartment.profit_percentage && (
@@ -97,7 +109,11 @@ const ProductGallery = () => {
                                         +{apartment.profit_percentage.toFixed(1)}%
                                         {apartment.forecast_price_next_year && (
                                             <span className="forecast-price">
-                                                ({formatNumber(Math.round(apartment.forecast_price_next_year * apartment.area))} ₽)
+                                                (
+                                                {formatNumber(
+                                                    Math.round(apartment.forecast_price_next_year * apartment.area)
+                                                )}{' '}
+                                                ₽)
                                             </span>
                                         )}
                                     </span>
@@ -114,9 +130,8 @@ const ProductGallery = () => {
             <button className="gallery-nav-button right" onClick={scrollRight} aria-label="Scroll right">
                 &#8250;
             </button>
-
         </div>
     );
 };
 
-export default ProductGallery; 
+export default ProductGallery;

@@ -82,7 +82,7 @@ function ApartmentList() {
             rooms: pending.rooms === '' ? '' : pending.rooms,
             complex_name: pending.complex
         });
-        api.get(`/?${queryParams}`)
+        api.get('/list/?' + queryParams)
             .then(response => {
                 setPendingCount(response.data.count || 0);
                 setCountLoading(false);
@@ -104,9 +104,9 @@ function ApartmentList() {
             rooms: applied.rooms === '' ? '' : applied.rooms,
             complex_name: applied.complex
         });
-        api.get(`/?${queryParams}`)
+        api.get('/list/?' + queryParams)
             .then(response => {
-                setApartments(response.data.results);
+                setApartments(response.data.results || []);
                 setTotal(response.data.count);
                 setLoading(false);
             })
@@ -398,13 +398,19 @@ function ApartmentList() {
                     <div className="apartments-grid">
                         {apartments.map(apartment => (
                             <Link to={`/apartments/${apartment.id}`} key={apartment.id} className="apartment-card">
-                                <div className="apartment-image-container">
-                                    {apartment.image ? (
-                                        <img src={apartment.image.startsWith('http') ? apartment.image : `http://192.168.0.44:8000${apartment.image}`} alt={apartment.title} className="apartment-image" />
-                                    ) : (
-                                        <div className="no-image">No image</div>
-                                    )}
-                                </div>
+                                {apartment.image_url ? (
+                                  <img
+                                    src={
+                                      apartment.image_url.startsWith('http')
+                                        ? apartment.image_url
+                                        : `http://localhost:81${apartment.image_url.startsWith('/') ? apartment.image_url : '/' + apartment.image_url}`
+                                    }
+                                    alt={apartment.title}
+                                  />
+                                ) : (
+                                  <div className="no-image">No image available</div>
+                                )}
+
                                 <div className="apartment-info">
                                     <div className="apartment-complex">{apartment.complex_name}</div>
                                     <div className="apartment-title-block">

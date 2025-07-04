@@ -106,7 +106,7 @@ def apartment_list_api(request):
             'price': apt.price,
             'price_per_m2': apt.price_per_m2,
             'complex_name': apt.complex_name,
-            'image': image_url
+            'image_url': image_url
         })
 
     return JsonResponse({
@@ -126,7 +126,7 @@ def apartment_list(request):
     for apt in apartments:
         image_url = None
         if apt.image:
-            image_url = request.build_absolute_uri(apt.image.url)
+            image_url = settings.BASE_URL + apt.image.url
         
         data.append({
             'id': apt.id,
@@ -138,7 +138,7 @@ def apartment_list(request):
             'price': apt.price,
             'price_per_m2': apt.price_per_m2,
             'complex_name': apt.complex_name,
-            'image': image_url
+            'image_url': image_url
         })
     return JsonResponse(data, safe=False)
 
@@ -147,7 +147,7 @@ def apartment_detail(request, pk):
         apartment = Apartment.objects.get(pk=pk)
         image_url = None
         if apartment.image:
-            image_url = request.build_absolute_uri(apartment.image.url)
+            image_url = settings.BASE_URL + apartment.image.url
             
         data = {
             'id': apartment.id,
