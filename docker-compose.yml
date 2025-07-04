@@ -25,7 +25,7 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: /src/Dockerfile.frontend
+      dockerfile: ../Dockerfile.frontend
     stdin_open: true
     tty: true
     ports:
