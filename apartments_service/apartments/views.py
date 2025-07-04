@@ -95,7 +95,7 @@ def apartment_list_api(request):
     for apt in apartments_page:
         image_url = None
         if apt.image:
-            image_url = request.build_absolute_uri(apt.image.url)
+            image_url = settings.BASE_URL + apt.image.url
         data.append({
             'id': apt.id,
             'title': apt.title,
@@ -235,8 +235,28 @@ def profitable_apartments(request):
             profit_percentage__isnull=True
         ).order_by('-profit_percentage')[:10]
 
-        serializer = ApartmentSerializer(apartments, many=True)
-        return Response(serializer.data)
+        data = []
+        for apt in apartments:
+            image_url = None
+            if apt.image:
+                image_url = settings.BASE_URL + apt.image.url
+            
+            data.append({
+                'id': apt.id,
+                'title': apt.title,
+                'rooms': apt.rooms,
+                'address': apt.address,
+                'floor': apt.floor,
+                'area': apt.area,
+                'price': apt.price,
+                'price_per_m2': apt.price_per_m2,
+                'complex_name': apt.complex_name,
+                'image_url': image_url,
+                'forecast_price_next_year': apt.forecast_price_next_year,
+                'profit_percentage': apt.profit_percentage
+            })
+        
+        return Response(data)
     except Exception as e:
         return Response({'error': str(e)}, status=500)
 

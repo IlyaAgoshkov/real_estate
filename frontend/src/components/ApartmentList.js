@@ -399,14 +399,17 @@ function ApartmentList() {
                         {apartments.map(apartment => (
                             <Link to={`/apartments/${apartment.id}`} key={apartment.id} className="apartment-card">
                                 {apartment.image_url ? (
-                                  <img
-                                    src={
-                                      apartment.image_url.startsWith('http')
-                                        ? apartment.image_url
-                                        : `http://localhost:81${apartment.image_url.startsWith('/') ? apartment.image_url : '/' + apartment.image_url}`
-                                    }
-                                    alt={apartment.title}
-                                  />
+                                  <div className="apartment-image-container">
+                                    <img
+                                      className="apartment-image"
+                                      src={
+                                        apartment.image_url.startsWith('http')
+                                          ? apartment.image_url
+                                          : `http://localhost:81${apartment.image_url.startsWith('/') ? apartment.image_url : '/' + apartment.image_url}`
+                                      }
+                                      alt={apartment.title}
+                                    />
+                                  </div>
                                 ) : (
                                   <div className="no-image">No image available</div>
                                 )}

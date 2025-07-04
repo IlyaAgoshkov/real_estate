@@ -111,15 +111,15 @@ const ApartmentDetail = () => {
             </div>
             <div className="apartment-content-horizontal">
                 <div className="apartment-image_detail">
-                    {apartment.image ? (
-                        <img
-                            src={
-                                apartment.image.startsWith('http')
-                                    ? apartment.image
-                                    : `http://localhost:81${apartment.image.startsWith('/') ? apartment.image : '/' + apartment.image}`
-                            }
-                            alt={apartment.title}
-                        />
+                    {apartment.image_url ? (
+                            <img
+                                src={
+                                    apartment.image_url.startsWith('http')
+                                        ? apartment.image_url
+                                        : `http://localhost:81${apartment.image_url.startsWith('/') ? apartment.image_url : '/' + apartment.image_url}`
+                                }
+                                alt={apartment.title}
+                            />
                     ) : (
                         <div className="no-image">No image available</div>
                     )}

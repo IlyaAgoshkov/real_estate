@@ -79,12 +79,12 @@ const ProductGallery = () => {
                 {apartments.slice(1).map(apartment => (
                     <Link to={`/apartments/${apartment.id}`} key={apartment.id} className="product-card">
                         <div className="product-image">
-                            {apartment.image ? (
+                            {apartment.image_url ? (
                                 <img
                                     src={
-                                        apartment.image.startsWith('http')
-                                            ? apartment.image
-                                            : `/media/${apartment.image.replace(/^\/+/, '')}`
+                                        apartment.image_url.startsWith('http')
+                                            ? apartment.image_url
+                                            : `http://localhost:81${apartment.image_url.startsWith('/') ? apartment.image_url : '/' + apartment.image_url}`
                                     }
                                     alt={apartment.title}
                                 />

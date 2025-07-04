@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*'] 
 
-BASE_URL = 'localhost:81'
+BASE_URL = 'http://localhost:81'
 
 # Application definition
 # CELERY_BROKER_URL = 'redis://localhost:6379/0'
@@ -137,7 +137,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static/'
 
 # Media files
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
